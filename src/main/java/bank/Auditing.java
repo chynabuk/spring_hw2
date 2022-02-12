@@ -1,18 +1,24 @@
 package bank;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
 @Component("auditing")
 public class Auditing {
+    @Value("${auditing.username}")
+    private String username;
+
+    @Value("${auditing.password}")
+    private String password;
+
     private Scanner in;
 
     public boolean validate(String username, String password){
-        String[] myData = {"kuba", "12345"};
         System.out.println("банк проверяет ваши учетные данные до перевода средств");
 
-        if (myData[0].equals(username) && myData[1].equals(password)){
+        if (this.username.equals(username) && this.password.equals(password)){
             System.out.println("успешно проверено");
             return true;
         }
